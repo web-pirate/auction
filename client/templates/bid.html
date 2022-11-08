@@ -1,0 +1,87 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+
+<!--============= Hero Section Starts Here =============-->
+<div class="hero-section">
+  <div class="container">
+    <ul class="breadcrumb">
+      <li>
+        <a href="./index.html">Home</a>
+      </li>
+      <li>
+        <a href="#0">Pages</a>
+      </li>
+      <li>
+        <span>Bid Submission</span>
+      </li>
+    </ul>
+  </div>
+  <div
+    class="bg_img hero-bg bottom_center"
+    data-background="{% static 'images/banner/hero-bg.png' %}"
+  ></div>
+</div>
+<!--============= Hero Section Ends Here =============-->
+
+<!--============= Account Section Starts Here =============-->
+<section class="account-section padding-bottom">
+  <div class="container">
+    <div class="account-wrapper mt--100 mt-lg--440">
+      <div class="left-side">
+        <div class="section-header">
+          <h4 class="title">Product: {{item.name}}</h4>
+          <img src="{{item.image.url}}" alt="yo" style="width: 200px" />
+        </div>
+        <div class="row mb-3">
+          <div class="col-5">
+            <h6>Current Avg Bid: <span style="color: red">${{avg}}</span></h6>
+          </div>
+          <div class="col-3">
+            <h6>Price: <span style="color: green">${{item.price}}</span></h6>
+          </div>
+          <div class="col-4">
+            <h6>Total Bids: <span style="color: green">{{bid}} Bids</span></h6>
+          </div>
+        </div>
+
+        <form class="login-form" method="post">
+          {% csrf_token %}
+          <div class="form-group mb-30">
+            <label for="login-email"
+              ><i class="fa-solid fa-sack-dollar" style="color: gold"></i
+            ></label>
+            <input type="number" name="amount" placeholder="Amount" />
+          </div>
+
+          <div class="form-group mb-30">
+            <label for="login-pass"
+              ><i class="fas fa-lock" style="color: green"></i
+            ></label>
+            <input
+              type="password"
+              id="login-pass"
+              placeholder="Confirm Password"
+              name="password"
+            />
+            <span class="pass-type"><i class="fas fa-eye"></i></span>
+          </div>
+
+          <div class="form-group mb-0">
+            <button type="submit" class="custom-button">LOG IN</button>
+          </div>
+        </form>
+      </div>
+      <div class="right-side cl-white">
+        <div class="section-header mb-0">
+          <h3 class="title mt-0">{{request.user}}</h3>
+          <p>{{request.user.email}}</p>
+          <a href="{% url 'home' %}" class="custom-button transparent"
+            >HomePage</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--============= Account Section Ends Here =============-->
+
+{% endblock content %}
